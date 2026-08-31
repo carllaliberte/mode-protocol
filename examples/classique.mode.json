@@ -1,0 +1,16 @@
+{
+  "format": "mode.v0",
+  "mode_id": "MD-fictif-001",
+  "mode": "classique",
+  "quelle_id": null,
+  "temoin_id": null,
+  "epsilon_id": null,
+  "horizon_id": null,
+  "bruit_id": null,
+  "raisons": ["quelle absente", "temoin absent", "epsilon absent", "horizon absent"],
+  "simule": true,
+  "juridiction": "QC",
+  "langue": "fr-CA",
+  "pose_at": "2026-08-31T21:55:00Z",
+  "note": "Acte fictif. Téléphone sans dongle. Mode classique. C'est le terrain."
+}

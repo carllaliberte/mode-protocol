@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/carllaliberte/mode-protocol/schema/mode.v0.json",
+  "title": "MODE v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "mode_id", "mode", "raisons", "simule", "juridiction", "langue", "pose_at"],
+  "properties": {
+    "format": { "const": "mode.v0" },
+    "mode_id": { "type": "string" },
+    "mode": { "enum": ["classique", "quantique"] },
+    "quelle_id": { "type": ["string", "null"] },
+    "temoin_id": { "type": ["string", "null"] },
+    "epsilon_id": { "type": ["string", "null"] },
+    "horizon_id": { "type": ["string", "null"] },
+    "bruit_id": { "type": ["string", "null"] },
+    "raisons": { "type": "array", "items": { "type": "string" } },
+    "simule": { "type": "boolean" },
+    "juridiction": { "type": "string" },
+    "langue": { "type": "string" },
+    "pose_at": { "type": "string" },
+    "note": { "type": "string" }
+  }
+}
