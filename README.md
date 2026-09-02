@@ -29,3 +29,5 @@ python -m quantum peut-dire --fichier carte.json   # exit 0 | 2
 
 Sans les quatre cartes : `classique`.
 Hôte cité : https://acorn-royal-dune-blend.grok.me
+
+Après famille#10 (Ville preview — badge SVG) : le badge PREVIEW n'est pas un verdict quantique. SANS JUGE.md.
