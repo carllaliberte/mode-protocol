@@ -67,9 +67,18 @@ def _garde_epsilon(c: dict) -> list[str]:
     rat = []
     if c.get("modele") in (None, "none"):
         rat.append("epsilon: modele none")
+    if "epsilon" not in c or c.get("epsilon") is None:
+        rat.append("epsilon: ε absent")
+        return rat
     eps = c.get("epsilon")
-    if not isinstance(eps, (int, float)) or isinstance(eps, bool) or eps <= 0 or eps > 1:
-        rat.append("epsilon: ε absent ou hors (0, 1]")
+    if not isinstance(eps, (int, float)) or isinstance(eps, bool):
+        rat.append("epsilon: ε illisible")
+        return rat
+    if eps <= 0 or eps >= 1:
+        if eps == 0:
+            rat.append("epsilon: ε=0 est un mensonge")
+        else:
+            rat.append("epsilon: ε hors (0, 1)")
     return rat
 
 
