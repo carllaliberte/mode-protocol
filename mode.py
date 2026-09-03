@@ -123,6 +123,10 @@ def juger(quelle=None, temoin=None, epsilon=None, horizon=None, bruit=None) -> d
     if bruit is not None:
         raisons.extend(_garde_bruit(bruit))
     quantique = not raisons
+    simule = any(
+        carte is not None and carte.get("simule") is True
+        for carte in (quelle, temoin, bruit)
+    )
     return {
         "mode": "quantique" if quantique else "classique",
         "raisons": [] if quantique else raisons,
@@ -131,7 +135,7 @@ def juger(quelle=None, temoin=None, epsilon=None, horizon=None, bruit=None) -> d
         "epsilon_id": (epsilon or {}).get("epsilon_id"),
         "horizon_id": (horizon or {}).get("horizon_id"),
         "bruit_id": (bruit or {}).get("bruit_id") if bruit else None,
-        "simule": not quantique,
+        "simule": simule,
         "note": "bornes tenues. étiquette quantique licite." if quantique else "mode classique. les raisons sont les bornes manquantes.",
     }
 

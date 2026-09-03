@@ -222,6 +222,50 @@ class NoQuantumSealInJson(unittest.TestCase):
         self.assertNotIn("Imagine", dumped)
 
 
+class SimuleIsAPresentedClaim(unittest.TestCase):
+    def test_quelle_os_is_classique_and_not_a_simulation(self):
+        jugement = _juger(quelle=_quelle(source="os"))
+        self.assertEqual(jugement["mode"], "classique")
+        self.assertIs(jugement["simule"], False)
+
+    def test_no_cards_is_classique_and_not_a_simulation(self):
+        jugement = mode.juger()
+        self.assertEqual(jugement["mode"], "classique")
+        self.assertIs(jugement["simule"], False)
+
+    def test_ecrire_without_cards_does_not_restamp_simule(self):
+        carte = mode.ecrire()
+        self.assertEqual(carte["mode"], "classique")
+        self.assertIs(carte["simule"], False)
+
+    def test_epsilon_zero_refuse_is_not_a_simulation(self):
+        jugement = _juger(epsilon=_epsilon(epsilon=0))
+        self.assertEqual(jugement["mode"], "classique")
+        self.assertIs(jugement["simule"], False)
+
+    def test_epsilon_one_refuse_is_not_a_simulation(self):
+        jugement = _juger(epsilon=_epsilon(epsilon=1))
+        self.assertEqual(jugement["mode"], "classique")
+        self.assertIs(jugement["simule"], False)
+
+    def test_epsilon_zero_plus_quelle_simule_keeps_the_claim(self):
+        jugement = _juger(quelle=_quelle(simule=True), epsilon=_epsilon(epsilon=0))
+        self.assertEqual(jugement["mode"], "classique")
+        self.assertIs(jugement["simule"], True)
+        self.assertIn("quelle: simule", jugement["raisons"])
+
+    def test_four_gates_with_quelle_simule_is_classique_and_simule(self):
+        jugement = _juger(quelle=_quelle(simule=True))
+        self.assertEqual(jugement["mode"], "classique")
+        self.assertIs(jugement["simule"], True)
+        self.assertIn("quelle: simule", jugement["raisons"])
+
+    def test_example_classique_card_is_not_a_simulation(self):
+        carte = json.loads((ROOT / "examples" / "classique.mode.json").read_text(encoding="utf-8"))
+        self.assertEqual(carte["mode"], "classique")
+        self.assertIs(carte["simule"], False)
+
+
 class Ufhy1IsASuiteNotADate(unittest.TestCase):
     def test_ufhy1_as_calendar_date_is_refused(self):
         jugement = _juger(horizon=_horizon(re_presser_avant="UFHY1"))

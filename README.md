@@ -33,6 +33,7 @@ QUELLE + TÉMOIN + EPSILON + HORIZON  →  verdict MODE
 
 - Classique by default. `quantique` only if QUELLE + TÉMOIN + EPSILON + HORIZON all hold.
 - `quelle: os` = classique. Phone entropy does not mint the label.
+- `simule` is a claim on a presented card (QUELLE / TÉMOIN / BRUIT). It is not restamped on every classique refuse. Missing cards, `quelle: os`, and ε=0 / ε=1 are not simulations.
 - EPSILON on this rail matches [epsilon-protocol](https://github.com/carllaliberte/epsilon-protocol) `945ddce`: composable ε ∈ (0, 1) exclusive. `ε=0` is a lie. `ε=1` is not a bound.
 - **Missing ε is not zero ε.** Named below as a FLAG on other consumers — not a theorem of this rail.
 - No IBM Job. No QPU as a checked gate.
