@@ -8,7 +8,7 @@
   "horizon_id": null,
   "bruit_id": null,
   "raisons": ["quelle absente", "temoin absent", "epsilon absent", "horizon absent"],
-  "simule": true,
+  "simule": false,
   "juridiction": "QC",
   "langue": "fr-CA",
   "pose_at": "2026-08-31T21:55:00Z",

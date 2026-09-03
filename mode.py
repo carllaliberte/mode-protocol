@@ -67,9 +67,18 @@ def _garde_epsilon(c: dict) -> list[str]:
     rat = []
     if c.get("modele") in (None, "none"):
         rat.append("epsilon: modele none")
+    if "epsilon" not in c or c.get("epsilon") is None:
+        rat.append("epsilon: ε absent")
+        return rat
     eps = c.get("epsilon")
-    if not isinstance(eps, (int, float)) or isinstance(eps, bool) or eps <= 0 or eps > 1:
-        rat.append("epsilon: ε absent ou hors (0, 1]")
+    if not isinstance(eps, (int, float)) or isinstance(eps, bool):
+        rat.append("epsilon: ε illisible")
+        return rat
+    if eps <= 0 or eps >= 1:
+        if eps == 0:
+            rat.append("epsilon: ε=0 est un mensonge")
+        else:
+            rat.append("epsilon: ε hors (0, 1)")
     return rat
 
 
@@ -114,6 +123,10 @@ def juger(quelle=None, temoin=None, epsilon=None, horizon=None, bruit=None) -> d
     if bruit is not None:
         raisons.extend(_garde_bruit(bruit))
     quantique = not raisons
+    simule = any(
+        carte is not None and carte.get("simule") is True
+        for carte in (quelle, temoin, bruit)
+    )
     return {
         "mode": "quantique" if quantique else "classique",
         "raisons": [] if quantique else raisons,
@@ -122,7 +135,7 @@ def juger(quelle=None, temoin=None, epsilon=None, horizon=None, bruit=None) -> d
         "epsilon_id": (epsilon or {}).get("epsilon_id"),
         "horizon_id": (horizon or {}).get("horizon_id"),
         "bruit_id": (bruit or {}).get("bruit_id") if bruit else None,
-        "simule": not quantique,
+        "simule": simule,
         "note": "bornes tenues. étiquette quantique licite." if quantique else "mode classique. les raisons sont les bornes manquantes.",
     }
 
